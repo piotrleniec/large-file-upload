@@ -4,10 +4,12 @@
   "dependencies": {
     "@rails/webpacker": "^3.2.0",
     "babel-preset-react": "^6.24.1",
+    "bootstrap": "^3.3.7",
     "coffeescript": "1.12.7",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "resolve-url-loader": "^2.2.1"
   },
   "devDependencies": {
     "eslint": "^4.15.0",
