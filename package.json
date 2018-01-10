@@ -9,11 +9,15 @@
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "resolve-url-loader": "^2.2.1"
   },
   "devDependencies": {
     "eslint": "^4.15.0",
     "eslint-plugin-react": "^7.5.1",
+    "redux-logger": "^3.0.6",
     "webpack-dev-server": "^2.10.1"
   }
 }
