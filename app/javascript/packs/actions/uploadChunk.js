@@ -1,6 +1,5 @@
+import { CHUNK_SIZE } from '../constants'
 import incrementChunkIndex from './incrementChunkIndex'
-
-const CHUNK_SIZE = 1000000
 
 const uploadChunk = file => (dispatch, getState) => {
   const { chunkIndex } = getState().chunkedUpload
