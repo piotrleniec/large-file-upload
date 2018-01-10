@@ -1,34 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import startUpload from '../actions/startUpload'
 
-const CHUNK_SIZE = 1000000
+const UploadButton = props => (
+  <input type="file" onChange={props.startUpload} />
+)
 
-export default class extends React.Component {
-  constructor(props) {
-    super(props)
+const mapDispatchToProps = dispatch => ({
+  startUpload: event => { dispatch(startUpload(event.target.files[0])) }
+})
 
-    this.processFile = this.processFile.bind(this)
-  }
-
-  processFile(event) {
-    this.uploadChunk(event.target.files[0], 0)
-  }
-
-  uploadChunk(file, chunkIndex) {
-    const fileSlice = file.slice(chunkIndex * CHUNK_SIZE, (chunkIndex + 1) * CHUNK_SIZE)
-    if (fileSlice.size === 0) return
-
-    const fileReader = new FileReader()
-    fileReader.onload = event => {
-      const arrayBuffer = event.target.result
-      console.log('CHUNK INDEX', chunkIndex, 'CHUNK LENGTH', arrayBuffer.byteLength)
-      this.uploadChunk(file, chunkIndex + 1)
-    }
-    fileReader.readAsArrayBuffer(fileSlice)
-  }
-
-  render() {
-    return (
-      <input type="file" onChange={this.processFile} />
-    )
-  }
-}
+export default connect(null, mapDispatchToProps)(UploadButton)
