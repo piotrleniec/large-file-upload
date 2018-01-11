@@ -55,3 +55,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'webpacker', '~> 3.0'
 gem 'pg', '~> 0.18'
+gem 'paperclip', '~> 5.0.0'
