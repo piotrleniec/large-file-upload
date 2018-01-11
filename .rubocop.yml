@@ -1,0 +1,10 @@
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - node_modules/**/*
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
