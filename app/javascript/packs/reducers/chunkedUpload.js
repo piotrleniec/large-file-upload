@@ -1,7 +1,7 @@
 import * as actionTypes from '../actionTypes'
 
 const initialState = {
-  fileSize: 1,
+  fileSize: null,
   uploadedBytes: 0
 }
 
