@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import UploadButton from './UploadButton'
 import ProgressBar from './ProgressBar'
+import Link from './Link'
 import './App.scss'
 
 const App = props => (
@@ -10,6 +11,7 @@ const App = props => (
       <div className="panel panel-primary">
         <div className="panel-body">
           {props.fileSize ? <ProgressBar /> : <UploadButton />}
+          {props.path && <Link />}
         </div>
       </div>
     </div>
@@ -17,7 +19,8 @@ const App = props => (
 )
 
 const mapStateToProps = state => ({
-  fileSize: state.chunkedUpload.fileSize
+  fileSize: state.chunkedUpload.fileSize,
+  path: state.chunkedUpload.path
 })
 
 export default connect(mapStateToProps)(App)

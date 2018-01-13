@@ -1,7 +1,9 @@
 import { range } from 'lodash-es'
 import { MAX_CHUNK_SIZE } from '../constants'
+import actionCableConsumer from '../actionCable'
 import setFileSize from './setFileSize'
 import addUploadedBytes from './addUploadedBytes'
+import showUploadedFileLink from './showUploadedFileLink'
 
 const readFileSlice = fileSlice => new Promise(resolve => {
   const fileReader = new FileReader()
@@ -21,6 +23,15 @@ export default file => async dispatch => {
     body: JSON.stringify({ chunked_upload_task: { file_size: file.size } })
   })
   const chunkedUploadTask = await response.json()
+
+  actionCableConsumer.subscriptions.create({
+    channel: 'ChunkedUploadTaskChannel',
+    id: chunkedUploadTask.id
+  }, {
+    received: data => {
+      dispatch(showUploadedFileLink(data.large_file.path))
+    }
+  })
 
   for (const index of range(Math.ceil(file.size / MAX_CHUNK_SIZE))) {
     const fileSlize = file.slice(index * MAX_CHUNK_SIZE, (index + 1) * MAX_CHUNK_SIZE)
