@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180111185540) do
+ActiveRecord::Schema.define(version: 20180113125924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,5 +32,17 @@ ActiveRecord::Schema.define(version: 20180111185540) do
     t.index ["chunked_upload_task_id"], name: "index_file_chunks_on_chunked_upload_task_id"
   end
 
+  create_table "large_files", force: :cascade do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type", null: false
+    t.integer "data_file_size", null: false
+    t.datetime "data_updated_at", null: false
+    t.bigint "chunked_upload_task_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chunked_upload_task_id"], name: "index_large_files_on_chunked_upload_task_id"
+  end
+
   add_foreign_key "file_chunks", "chunked_upload_tasks"
+  add_foreign_key "large_files", "chunked_upload_tasks"
 end
