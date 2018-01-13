@@ -9,5 +9,10 @@ class ConcatenateFileChunksJob < ApplicationJob
     end
 
     chunked_upload_task.create_large_file!(data: large_file_data)
+
+    ActionCable.server.broadcast(
+      "chunked_upload_task_#{chunked_upload_task.id}",
+      SerializeChunkedUploadTask.new(chunked_upload_task).call
+    )
   end
 end
